@@ -18,30 +18,32 @@ Fork from [aws-es-proxy](https://github.com/abutaha/aws-es-proxy)
 
 ## Installation
 
-### Download binary executable
+### 下载二进制文件
 
 **aws-es-proxy** has single executable binaries for Linux, Mac and Windows.
 
-Download the latest [aws-es-proxy release](https://github.com/abutaha/aws-es-proxy/releases/).
+Download the latest [aws-es-proxy-by-ec2 release](https://github.com/jewdore/aws-es-proxy-by-ec2/releases).
 
 ### Docker
 
-There is an official docker image avaiable for aws-es-proxy. To run the image:
+可以自己构建，然后直接docker run。注意：docker方式必须提供listen参数，默认127.0.0.1，只接受docker 容器内的回环会话。
 
 ```sh
-# v0.9 and newer (latest always point to the latest release):
-
-docker run --rm -it abutaha/aws-es-proxy:0.9 -endpoint https://dummy-host.ap-southeast-2.es.amazonaws.com
-
-v.08:
-
-docker run --rm -it abutaha/aws-es-proxy ./aws-es-proxy -endpoint https://dummy-host.ap-southeast-2.es.amazonaws.com
-
+docker build -t <image_tag> .
+&& docker run
+--entrypoint /app -listen 0.0.0.0:9200 -endpoint https://demo.us-west-2.es.amazonaws.com -verbose -pretty -ssh-config /tmp/config.yaml
+-v /Users/jewdore/.rtb-tools/bidder-config:/tmp/config.yaml
+-p 9200:9200
+<image_tag> 
+著作权归作者所有。
+商业转载请联系作者获得授权，非商业转载请注明出处。
+作者：IT玩客
+链接：https://www.91the.top/joy/aws-es-proxy-by-ec2.html
 ```
 ### Via homebrew
 
 ```sh
-brew install aws-es-proxy
+brew tap jewdore/tap && brew install aws-es-proxy-by-ec2
 ```
 ## Configuring Credentials
 
