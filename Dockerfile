@@ -20,9 +20,6 @@ FROM alpine:3.10
 LABEL name="aws-es-proxy-by-ec2" \
       version="latest"
 COPY --from=builder /tmp/app /app
-RUN apk --no-cache add ca-certificates
-RUN apk add curl bash \
-    && rm -rf /var/cache/apk/*
 
 EXPOSE 9200
 ENTRYPOINT ["/app"]
